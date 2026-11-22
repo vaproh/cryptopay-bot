@@ -28,7 +28,7 @@ COIN = {"bsc": "🟡", "polygon": "🟣", "solana": "🟢", "ethereum": "🔵",
 
 
 def rows(*items):
-    return [list(i) if isinstance(i, (list, tuple)) else [i] for i in items]
+    return [list(i) if isinstance(i, list | tuple) else [i] for i in items]
 
 
 def kb(rows_):
