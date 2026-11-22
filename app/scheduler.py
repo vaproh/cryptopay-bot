@@ -83,10 +83,10 @@ async def _backup(cfg: Config) -> None:
         await asyncio.sleep(_next_at(cfg, 3))
         try:
             stamp = datetime.now(tz=ZoneInfo(cfg.tz)).strftime("%Y%m%d")
-            path = os.path.join(folder, f"payram-{stamp}.db")
+            path = os.path.join(folder, f"cryptopay-{stamp}.db")
             db.conn().execute("VACUUM INTO ?", (path,))
             keep = sorted(f for f in os.listdir(folder)
-                          if f.startswith("payram-") and f.endswith(".db"))
+                          if f.startswith("cryptopay-") and f.endswith(".db"))
             for old in keep[:-7]:
                 os.remove(os.path.join(folder, old))
         except Exception:

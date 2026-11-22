@@ -8,7 +8,7 @@ from . import bot as botmod
 from . import config, db, scheduler
 from . import web as webmod
 
-log = logging.getLogger("payram")
+log = logging.getLogger("cryptopay")
 
 
 async def connect_telegram(tg) -> None:

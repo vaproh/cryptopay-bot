@@ -136,7 +136,7 @@ Everything is environment. The important ones:
 | `BRAND_NAME` / `BRAND_LOGO` | `PAY` / `icons/logo.svg` | bot and page |
 | `BRAND_ACCENT` / `BRAND_ACCENT2` | `#c8102e` / `#ff2b3d` | buttons, stripes, timer |
 | `BRAND_BG` / `BRAND_TEXT` | `#000000` / `#e8e5df` | page colours |
-| `DB_PATH` | `/data/payram.db` | volume this |
+| `DB_PATH` | `/data/cryptopay.db` | volume this |
 | `TZ` | `Asia/Kolkata` | "today" in the bot and the 09:00 summary |
 
 ## Layout

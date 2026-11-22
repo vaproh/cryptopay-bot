@@ -111,12 +111,12 @@ misconfigured — check the public URL and the HAProxy/proxy path.
 
 ## 8. Backups
 
-A nightly `VACUUM INTO` lands in `./data/payram-YYYYMMDD.db`, seven kept. Restore:
+A nightly `VACUUM INTO` lands in `./data/cryptopay-YYYYMMDD.db`, seven kept. Restore:
 
 ```sh
 docker compose stop pay
-cp data/payram-20260101.db data/payram.db
-rm -f data/payram.db-wal data/payram.db-shm
+cp data/cryptopay-20260101.db data/cryptopay.db
+rm -f data/cryptopay.db-wal data/cryptopay.db-shm
 docker compose start pay
 ```
 

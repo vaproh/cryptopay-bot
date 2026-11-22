@@ -47,7 +47,7 @@ def load() -> Config:
         bot_token=_req("BOT_TOKEN"),
         owner_id=int(_req("OWNER_ID")),
         public_base=_req("PUBLIC_BASE").rstrip("/"),
-        db_path=_env("DB_PATH", "/data/payram.db"),
+        db_path=_env("DB_PATH", "/data/cryptopay.db"),
         nowpayments_key=_env("NOWPAYMENTS_KEY"),
         nowpayments_ipn_secret=_env("NOWPAYMENTS_IPN_SECRET"),
         alert_chat_id=int(_env("ALERT_CHAT_ID")) if _env("ALERT_CHAT_ID") else None,
