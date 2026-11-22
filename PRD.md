@@ -1,67 +1,63 @@
-# PRD — cryptopay-bot
+# PRD: cryptopay-bot
 
-Version 1.0 · Status: shipped
+Version 1.0. Shipped.
 
 ## Problem
 
-A small team sells work over Telegram and gets paid in USDT. The existing options are wrong
-for the size of the business:
+A small team sells work over Telegram and gets paid in USDT.
 
-- **Hosted checkouts** (NOWPayments invoices alone) work, but every link has to be created
-  by hand in a dashboard and the fee is 1–1.5% with a $5 floor on Ethereum.
-- **Self-hosted processors** (BTCPay, PayRam) are built for merchants with a store, a
-  dashboard and a server per chain. Heavy for four people and one chat.
-- **Doing nothing** means asking clients to send to a personal wallet and then checking a
-  block explorer by hand, which loses track of who paid for what.
+Hosted checkouts work, but every link has to be created in a dashboard by hand, and the fee
+is 1 to 1.5 percent with a $5 floor on Ethereum. Self-hosted processors such as BTCPay and
+PayRam assume a store, a dashboard and a server per chain. Both are more than four people
+and one chat need. Sending clients a personal wallet address instead loses track of which
+payment belongs to which job.
 
-What is missing is the middle: a link generator a non-technical teammate can operate from
-the app they already have open, that produces a page good enough to send a client, and that
-tells the right person the moment money arrives.
+What is needed: a link a teammate can create from the app they already have open, a page
+good enough to send a client, and a message to the right person when the money arrives.
 
 ## Users
 
-| Who | Need |
+| User | Needs |
 |---|---|
-| **Owner** | add/remove teammates, see all orders, know the bot and both gateways are alive |
-| **Team member** | create a link in under 20 seconds, from a phone, without learning a dashboard |
-| **Client** | a page that opens fast, shows one amount, one address, and how long they have |
+| Owner | add and remove teammates, see every order, know both gateways are up |
+| Teammate | create a link in under 20 seconds, from a phone |
+| Client | one amount, one address, a clear deadline |
 
-Non-user: the client never talks to the bot. They receive a URL and nothing else.
+The client never talks to the bot. They receive a URL.
 
 ## Scope of v1
 
 In scope:
 
-- one payment link per order, one chain per link
-- USD-denominated amounts, converted at creation
+- one link per order, one chain per link
+- amounts in USD, converted once at creation
 - six chains across two providers
-- a public payment page with QR, address, wallets, countdown, and nine payment states
-- payment detection by webhook **and** reconciliation
-- notifications to the creating teammate
+- a checkout page with QR, address, wallet options, countdown and eleven states
+- payment detection by webhook and by reconciliation
+- notification to the teammate who created the order
 - owner-only membership management
 - CSV export, search, daily summary, nightly backup
 
-Explicitly out of scope for v1:
+Out of scope:
 
-- customer accounts or a shop with a cart
+- customer accounts or a cart
 - recurring invoices and subscriptions
-- refunds (neither provider exposes one)
-- multi-currency pricing (USD only)
+- refunds; neither provider exposes one
+- currencies other than USD
 - a web dashboard
-- multiple owners or granular roles
+- multiple owners or extra roles
 
-## Core flow
+## Flow
 
 1. Teammate sends `/new`.
-2. Bot asks for the chain. Presets that cannot meet the floor for the amount are hidden.
-3. Bot asks for the amount in USD. Free text; the per-chain floor is validated server-side.
-4. Bot asks how long the link lives: 30 minutes, 2 hours, 24 hours, and 7 days on CryptAPI.
-5. Bot asks for an optional client label, e.g. an invoice number.
+2. Bot asks for the chain.
+3. Bot asks for the amount in USD. Free text, validated against the chain floor.
+4. Bot asks for a lifetime: 30 minutes, 2 hours, 24 hours, or 7 days on CryptAPI.
+5. Bot asks for an optional client label, such as an invoice number.
 6. Bot shows a summary and a create button.
-7. On create: the provider is called, an order row is written, and the bot replies with the
-   link.
+7. On create: provider called, order written, link returned.
 8. Teammate sends the link to the client.
-9. Client pays. Webhook or reconciler credits the order; the creator is notified once.
+9. Client pays. Webhook or reconciler credits the order. Creator is notified once.
 
 ## Requirements
 
@@ -69,83 +65,83 @@ Explicitly out of scope for v1:
 
 | # | Requirement |
 |---|---|
-| F1 | A link must never be created below the chain minimum |
-| F2 | The amount is entered in USD and converted once, at creation |
-| F3 | Each order gets a unique, unguessable token and a sequential invoice number |
-| F4 | Expiry is enforced server-side; an expired link renders no address |
-| F5 | Payments credit once per txid |
-| F6 | Underpayment is `paid` only at ≥99% and ≤$0.50 short |
-| F7 | Multiple partial payments accumulate toward one order |
-| F8 | A payment after expiry within the grace window is `paid`; after it, `late_paid` |
-| F9 | Every status change notifies the order's creator exactly once |
-| F10 | If the creator blocked the bot, the alert goes to `ALERT_CHAT_ID` |
+| F1 | A link is never created below the chain minimum |
+| F2 | Amount is entered in USD and converted once |
+| F3 | Every order gets a random token and a sequential invoice number |
+| F4 | Expiry is enforced on the server; an expired link renders no address |
+| F5 | A payment credits an order once per txid |
+| F6 | Underpayment counts as paid only at 99% or more and at most $0.50 short |
+| F7 | Several partial payments accumulate toward one order |
+| F8 | A payment after expiry inside the grace window is paid; after it, late_paid |
+| F9 | Every status change notifies the creator once |
+| F10 | If the creator blocked the bot, the alert goes to ALERT_CHAT_ID |
 | F11 | Unpaid orders are reconciled against the provider every five minutes |
 | F12 | Only the owner can add or remove members |
-| F13 | The page shows the real received amount, not a placeholder |
+| F13 | The page shows the amount actually received |
 
 ### Non-functional
 
 | # | Requirement |
 |---|---|
-| N1 | The checkout page fits one screen at 360×640 without scrolling |
-| N2 | The page works with JavaScript partially blocked: address and QR still render |
-| N3 | A QR must decode with a standard scanner at every chain and both QR modes |
-| N4 | The bot must answer `/ping` in under two seconds on a slow link |
-| N5 | No secret appears in the image, the repo, or Telegram messages |
+| N1 | The page fits 360x640 without scrolling |
+| N2 | Address and QR render without JavaScript |
+| N3 | Every QR decodes with a standard scanner |
+| N4 | `/ping` answers within two seconds on a slow link |
+| N5 | No secret in the image, the repository or Telegram messages |
 | N6 | The database survives a hard kill: WAL, single writer, idempotent inserts |
-| N7 | A dropped webhook costs at most five minutes of delay |
-| N8 | Restarting the process loses no order state; in-progress drafts may be lost |
+| N7 | A dropped webhook costs at most five minutes |
+| N8 | A restart loses no order state; an unfinished draft may be lost |
 
-## Payment states
+## States
 
 ```
-pending ──▶ partial ──▶ paid
-   │            │
-   │            └────▶ overpaid
-   ├──▶ expired ──▶ late_paid
-   ├──▶ cancelled
-   ├──▶ underpaid        (below the chain minimum)
-   ├──▶ wrongasset       (wrong coin or network)
-   └──▶ failed           (provider rejected the create call)
+pending --> partial --> paid
+   |           |
+   |           +--> overpaid
+   +--> expired --> late_paid
+   +--> cancelled
+   +--> underpaid      below the chain minimum
+   +--> wrongasset     wrong coin or network
+   +--> failed         provider rejected the create call
 ```
 
-`confirming` is transient: seen on-chain, not yet at the confirmation threshold.
+`confirming` is transient: seen on chain, not yet at the confirmation threshold.
 
 ## Acceptance criteria
 
-v1 is accepted when, on a fresh host:
+On a fresh host:
 
-1. `/new` for each of the six chains produces a link whose page opens over HTTPS and shows
-   the right chain, asset and amount.
-2. Paying a BSC order in full flips the page to `PAID` and sends one notification.
-3. Sending 60% of a Polygon order produces `PART PAID` with the exact remainder, and a
-   second transfer that completes it produces `PAID`, not `OVERPAID`.
-4. Killing the web process for two minutes during a payment still results in `PAID` after
-   the reconciler runs.
-5. A link opened after expiry shows `LINK DEAD` and no address.
-6. `/export 7d` returns a CSV that opens in a spreadsheet.
-7. `pytest` passes on a clean checkout, and the container starts with only `BOT_TOKEN`,
-   `OWNER_ID` and `PUBLIC_BASE` set.
+1. `/new` on each of the six chains produces a link that opens over HTTPS with the expected
+   chain, asset and amount.
+2. A full payment on BSC flips the page to PAID and sends one notification.
+3. Paying 60% of a Polygon order yields PART PAID with the exact remainder; the second
+   transfer yields PAID, not OVERPAID.
+4. Stopping the web process for two minutes during a payment still ends in PAID after the
+   reconciler runs.
+5. A link opened after expiry shows LINK DEAD and no address.
+6. `/export 7d` returns a CSV a spreadsheet can open.
+7. `pytest` passes on a clean checkout, and the container starts with only BOT_TOKEN,
+   OWNER_ID and PUBLIC_BASE set.
 
-## Success measures
+## Measures
 
-- median time from `/new` to link delivered: under 30 seconds
-- orders stuck in `pending` past expiry with no operator action: near zero
-- unreconciled payments (money in, order not credited): zero
-- duplicated credits: zero
+- time from `/new` to link delivered under 30 seconds
+- no order left pending past expiry without operator action
+- no payment received but uncredited
+- no duplicated credits
 
 ## Risks
 
 | Risk | Mitigation |
 |---|---|
-| Provider drops a webhook | five-minute reconciler |
-| CryptAPI address stays payable after expiry | grace window, `late_paid` state, alert |
-| NOWPayments custody holds funds | payout address documented in DEPLOY |
-| Underpayment on a large invoice | absolute cap on the tolerance, not a flat percentage |
-| Wrong-chain transfer | QR carries the chain and asset; page names the network; `wrongasset` state |
-| Operator error (typo in amount) | summary screen before create, max amount confirmation |
+| provider drops a webhook | five-minute reconciler |
+| CryptAPI address stays payable after expiry | grace window, late_paid state, alert |
+| NOWPayments holds funds in custody | payout address documented in DEPLOY |
+| underpayment on a large invoice | absolute cap on the tolerance |
+| wrong-chain transfer | QR carries chain and asset; page names the network; wrongasset state |
+| operator enters the wrong amount | summary before create; confirmation above MAX_USD |
 
-## v1.1 candidates
+## Later
 
-Recurring invoices, a shared team chat as a second notification target, per-chain fee
-display, refund tracking as a label rather than an action.
+Recurring invoices, a team chat as a second notification target, fee display per chain,
+refund tracking as a label rather than an action.
