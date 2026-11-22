@@ -1,0 +1,6 @@
+.git
+data
+.playwright-mcp
+tests
+__pycache__
+.env

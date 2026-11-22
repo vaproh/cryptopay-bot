@@ -1,0 +1,11 @@
+services:
+  pay:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "8090:8090"
+    volumes:
+      - ./data:/data
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"

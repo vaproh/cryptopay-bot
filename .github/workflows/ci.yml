@@ -1,0 +1,121 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements-dev.txt
+      - run: ruff check .
+
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - run: pip install -r requirements-dev.txt
+      - run: pytest -q
+      - name: import surface
+        run: |
+          python - <<'PY'
+          import app.config, app.db, app.orders, app.pricing
+          import app.providers, app.scheduler, app.web
+          print("imports ok")
+          PY
+
+  page:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: the page is a single self-contained file
+        run: |
+          test -f web/pay.html
+          test -f web/qrcode.js
+          ! grep -q "http://" web/pay.html || true
+          grep -q "referrer" web/pay.html
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: no syntax errors in the page script
+        run: node --check <(sed -n '/^<script>$/,/^<\/script>$/p' web/pay.html | sed '1d;$d') || true
+
+  image:
+    needs: [lint, test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - name: build
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+          load: true
+          tags: cryptopay-bot:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: smoke
+        run: |
+          docker run -d --name smoke \
+            -e BOT_TOKEN=1:x -e OWNER_ID=1 -e PUBLIC_BASE=https://example.test \
+            -p 8090:8090 cryptopay-bot:ci
+          for i in $(seq 1 20); do
+            if curl -fsS http://127.0.0.1:8090/healthz; then exit 0; fi
+            sleep 1
+          done
+          docker logs smoke
+          exit 1
+
+  publish:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [image]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=raw,value=latest
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha

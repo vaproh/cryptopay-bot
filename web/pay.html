@@ -1,0 +1,1131 @@
+<!doctype html>
+<html lang="en" data-state="live">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#07080a">
+<link rel="icon" type="image/svg+xml" href="icons/logo.svg">
+<link rel="apple-touch-icon" href="icons/logo.svg">
+<title>Invoice INV-0007 · 10.00 USDT</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="cache-control" content="no-store, private">
+<meta property="og:title" content="Invoice INV-0007 · 10.00 USDT">
+<meta property="og:description" content="Pay 10.00 USDT on BNB Smart Chain (BEP-20).">
+<style>
+  :root{
+    --bg:#000;
+    --card:#050505;
+    --panel:#0a0a0a;
+    --line:#1e1e1e;
+    --line-2:#333;
+    --text:#e8e5df;
+    --muted:#9a9893;
+    --muted-2:#6e6c68;
+    --red:#c8102e;
+    --red-hot:#ff2b3d;
+    --accent:#c8102e;
+    --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+    --sans:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{height:100%}
+  body{
+    margin:0;min-height:100vh;min-height:100dvh;
+    background:var(--bg);color:var(--text);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;
+    display:grid;place-items:center;
+    padding:14px 12px calc(14px + env(safe-area-inset-bottom));
+  }
+
+  .card{
+    position:relative;z-index:1;width:100%;max-width:400px;
+    background:var(--card);border:1px solid var(--line);
+    padding:18px 16px 14px;overflow:hidden;
+  }
+
+  /* top-edge time bar */
+  .track{position:absolute;top:0;left:0;right:0;height:8px;background:#141414;overflow:hidden}
+  .track i{
+    display:block;position:relative;height:100%;width:100%;
+    background:var(--time,var(--accent));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.28), inset 0 -1px 0 rgba(0,0,0,.5);
+    transition:width 1s linear, background .4s steps(2,end);
+  }
+  .track i::after{
+    content:"";position:absolute;right:0;top:0;bottom:0;width:2px;
+    background:#fff;
+  }
+  .track::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(90deg,
+      transparent 0 24.7%, #000 24.7% 25.3%, transparent 25.3% 49.7%,
+      #000 49.7% 50.3%, transparent 50.3% 74.7%, #000 74.7% 75.3%, transparent 75.3%);
+    opacity:.85;
+  }
+  .card.urgent .track i{animation:barb 1s steps(2,end) infinite}
+  @keyframes barb{0%,100%{opacity:1}50%{opacity:.3}}
+
+  /* ---------- header ---------- */
+  .top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}
+  .brand{
+    display:flex;align-items:center;gap:9px;flex:none;
+    font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  }
+  .mark{
+    width:26px;height:26px;overflow:hidden;flex:none;display:block;
+    background:#0b0c0f;outline:1px solid var(--line-2);
+  }
+  .mark img{width:100%;height:100%;object-fit:cover;object-position:50% 50%;transform:scale(1.5);display:block}
+  .meta{
+    font-size:10px;color:var(--muted-2);text-align:right;flex:1;min-width:0;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+    text-transform:uppercase;letter-spacing:.1em;
+  }
+  .meta b{color:var(--muted);font-weight:500;font-family:var(--mono);letter-spacing:.08em}
+
+  /* ---------- hero ---------- */
+  .eyebrow{
+    display:flex;align-items:center;gap:7px;
+    font-size:9.5px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--muted-2);margin-bottom:6px;
+  }
+  .eyebrow::before{content:"";width:7px;height:7px;background:var(--red);flex:none}
+  .hero-fiat{
+    display:flex;align-items:baseline;line-height:.92;letter-spacing:-.035em;
+    font-size:clamp(44px,13vw,54px);font-weight:800;font-variant-numeric:tabular-nums;
+  }
+  .hero-fiat .cur{font-size:.55em;font-weight:500;color:var(--text);opacity:.8;margin-right:2px;letter-spacing:0}
+  .hero-crypto{
+    display:flex;align-items:center;flex-wrap:wrap;gap:0 8px;margin-top:12px;
+    font-size:15px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--muted);font-variant-numeric:tabular-nums;
+  }
+  .hero-crypto b{color:var(--text);font-weight:700}
+  .asset-ico{width:24px;height:24px;align-self:center;margin:0 -2px 0 0;flex:none}
+  .hero-crypto .sep{color:var(--muted-2);font-weight:400}
+  .hero-crypto .chain-name{color:var(--text);font-weight:700}
+
+  /* ---------- countdown ---------- */
+  .countdown{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    margin-top:10px;padding:10px 12px;
+    background:transparent;border:1px solid transparent;
+    color:var(--time,var(--accent));
+    transition:border-color .4s steps(2,end), background .4s steps(2,end), color .4s steps(2,end);
+  }
+  .card.warn .countdown{border-color:var(--time);background:rgba(200,16,46,.06)}
+  .cd-dot{width:7px;height:7px;background:currentColor;flex:none}
+  .urgent .cd-dot{animation:barb 1s steps(2,end) infinite}
+  .cd-time{font-family:var(--mono);font-size:15px;font-weight:700;letter-spacing:.04em;font-variant-numeric:tabular-nums}
+  .cd-label{font-size:9.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;opacity:.9}
+
+  /* ---------- qr ---------- */
+  .qr-wrap{display:flex;justify-content:center;margin:14px 0 0}
+  .qr{
+    position:relative;width:224px;height:224px;padding:12px;
+    display:grid;place-items:center;outline:1px solid #2a2a2a;
+    background:#fff;
+  }
+
+  .qr svg{width:100%;height:100%;display:block}
+
+  .qrctl{display:flex;gap:6px;justify-content:center;margin-top:12px}
+  .seg{display:flex;border:1px solid var(--line)}
+  .seg button{
+    appearance:none;border:0;background:transparent;color:var(--muted-2);
+    font-family:inherit;font-size:9px;font-weight:700;letter-spacing:.16em;
+    text-transform:uppercase;padding:7px 11px;cursor:pointer;
+    transition:background .12s linear,color .12s linear;
+  }
+  .seg button + button{border-left:1px solid var(--line)}
+  .seg button.on{background:var(--red);color:#fff}
+  .seg button:not(.on):hover{color:var(--text)}
+
+  /* ---------- address ---------- */
+  .addr-box{
+    display:flex;align-items:stretch;gap:0;margin-top:14px;
+    background:var(--panel);border:1px solid var(--line);
+    min-height:44px;
+  }
+  .addr{
+    font-family:var(--mono);font-size:11.5px;line-height:1.35;color:#c9c6c0;
+    flex:1;min-width:0;word-break:break-all;padding:7px 10px;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+    align-self:center;
+  }
+  .copy{
+    flex:none;appearance:none;border:0;border-left:1px solid var(--line);
+    background:transparent;color:var(--red);height:auto;padding:0 12px;
+    font-family:inherit;font-size:9.5px;font-weight:700;letter-spacing:.16em;
+    text-transform:uppercase;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;
+    transition:background .12s linear,color .12s linear;
+  }
+  .copy:hover{background:var(--red);color:#fff}
+  .copy.done{background:var(--red);color:#fff}
+  .copy svg{width:13px;height:13px}
+
+  .warnline{
+    display:flex;align-items:center;justify-content:center;gap:6px;
+    margin-top:10px;font-size:9.5px;line-height:1.4;letter-spacing:.12em;
+    text-transform:uppercase;color:#8e1226;text-align:center;
+  }
+  .warnline svg{width:11px;height:11px;flex:none;color:var(--red)}
+  .warnline b{color:var(--red);font-weight:700}
+
+  /* ---------- wallets ---------- */
+  .wallets{margin-top:20px}
+  .w-label{
+    font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--muted-2);margin-bottom:10px;text-align:center;
+  }
+  .wgrid{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+  .w{
+    flex:0 0 auto;width:56px;height:56px;
+    display:grid;place-items:center;padding:0;cursor:pointer;
+    border:1px solid var(--line);background:#070707;
+    font:inherit;color:inherit;text-decoration:none;
+    transition:border-color .12s linear,background .12s linear;
+  }
+  .w:hover{border-color:var(--red);background:#0d0d0d}
+  .w:active{background:#141414}
+  .w img{width:26px;height:26px;display:block;pointer-events:none}
+  .w:focus-visible{outline:2px solid var(--red);outline-offset:1px}
+
+  .wpay{
+    width:100%;margin-top:8px;min-height:44px;border:0;
+    background:var(--red);color:#fff;
+    font-family:inherit;font-size:11.5px;font-weight:700;letter-spacing:.16em;
+    text-transform:uppercase;cursor:pointer;
+    display:none;align-items:center;justify-content:center;
+  }
+  .wpay:hover{background:var(--red-hot)}
+  .wpay.show{display:flex}
+
+  /* ---------- footer ---------- */
+  .foot{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    margin-top:16px;padding-top:12px;border-top:1px solid var(--line);
+    font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);
+  }
+  .live{display:inline-flex;align-items:center;gap:7px}
+  .pulse{width:5px;height:5px;background:var(--text);animation:pulse 2s steps(2,end) infinite}
+  .pulse.amber{background:var(--red)}
+  .pulse.idle{background:var(--muted-2);animation:none}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.2}}
+
+  /* ---------- states ---------- */
+  .panel{display:none}
+  .panel .big{
+    display:flex;align-items:flex-start;gap:12px;padding:13px;
+    border:1px solid var(--line);border-left:3px solid var(--muted-2);
+    background:var(--panel);
+  }
+  .panel .icon{width:30px;height:30px;display:grid;place-items:center;flex:none;color:var(--muted)}
+  .panel .icon svg{width:18px;height:18px}
+  .panel h2{margin:0;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+  .panel p{margin:5px 0 0;font-size:11.5px;color:var(--muted);line-height:1.5}
+  .panel p b{color:var(--text);font-variant-numeric:tabular-nums}
+  .txid{margin-top:9px;font-family:var(--mono);font-size:10px;color:var(--muted-2);word-break:break-all;line-height:1.5}
+
+  #p-paid .big{border-left-color:var(--text)}
+  #p-paid .icon{color:var(--text)}
+  #p-confirming .big,#p-partial .big,#p-overpaid .big,#p-late .big,#p-underpaid .big,#p-wrongasset .big{border-left-color:var(--red)}
+  #p-confirming .icon,#p-partial .icon,#p-overpaid .icon,#p-late .icon,#p-underpaid .icon,#p-wrongasset .icon{color:var(--red)}
+  #p-expired .big,#p-cancelled .big,#p-notfound .big{border-left-color:var(--muted-2)}
+  #p-confirming .icon.spin svg{animation:spin 1.1s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  :is([data-state="paid"],[data-state="expired"],[data-state="overpaid"],[data-state="confirming"],
+      [data-state="late"],[data-state="cancelled"],[data-state="underpaid"],[data-state="notfound"],
+      [data-state="wrongasset"])
+      :is(.pay,.wallets,.warnline,.countdown,.track){display:none}
+
+  [data-state="paid"] #p-paid,
+  [data-state="expired"] #p-expired,
+  [data-state="partial"] #p-partial,
+  [data-state="overpaid"] #p-overpaid,
+  [data-state="confirming"] #p-confirming,
+  [data-state="late"] #p-late,
+  [data-state="cancelled"] #p-cancelled,
+  [data-state="underpaid"] #p-underpaid,
+  [data-state="wrongasset"] #p-wrongasset,
+  [data-state="notfound"] #p-notfound{display:block}
+
+  [data-state="notfound"] :is(.hero-fiat,.hero-crypto,.eyebrow,.meta){display:none}
+
+  .struck .hero-fiat,.struck .hero-crypto{color:var(--muted-2)}
+
+  .nohint{
+    margin-top:9px;font-size:9.5px;line-height:1.6;color:var(--muted-2);
+    text-align:center;letter-spacing:.08em;text-transform:uppercase;
+  }
+
+  /* ---------- sheets ---------- */
+  .sheet{
+    position:fixed;inset:0;z-index:60;display:none;align-items:flex-end;justify-content:center;
+    background:rgba(0,0,0,.82);padding:12px;
+  }
+  .sheet.open{display:flex}
+  .sheet-card{
+    width:100%;max-width:380px;background:#080808;border:1px solid var(--line-2);
+    border-top:3px solid var(--red);
+    padding:18px;
+  }
+  .sheet-card h3{margin:0 0 4px;font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+  .sheet-card .sub{margin:0 0 16px;font-size:11px;color:var(--muted);line-height:1.5}
+  .rows{display:grid;gap:9px;margin-bottom:16px}
+  .row{display:flex;align-items:baseline;justify-content:space-between;gap:14px;font-size:11px}
+  .row span{color:var(--muted-2);letter-spacing:.14em;text-transform:uppercase;font-size:9.5px}
+  .row b{font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
+  .row code{font-family:var(--mono);font-size:11px}
+  .sheet-actions{display:grid;gap:8px}
+  .btn-primary{
+    min-height:46px;border:0;cursor:pointer;
+    background:var(--red);color:#fff;
+    font-family:inherit;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  }
+  .btn-primary:hover{background:var(--red-hot)}
+  .btn-ghost{
+    min-height:42px;cursor:pointer;background:transparent;
+    border:1px solid var(--line-2);color:var(--muted);
+    font-family:inherit;font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  }
+  .btn-ghost:hover{border-color:var(--muted);color:var(--text)}
+  .demo-note{
+    display:none;margin-top:12px;padding:10px;
+    background:#120608;border-left:3px solid var(--red);
+    font-size:11px;line-height:1.55;color:#c9a0a6;
+  }
+  .demo-note.show{display:block}
+  .wc-qr{
+    width:190px;height:190px;margin:2px auto 12px;background:#fff;padding:11px;
+    display:grid;place-items:center;
+  }
+  .wc-qr svg{width:100%;height:100%;display:block}
+  .wc-qr:empty{display:none}
+  .wc-uri{
+    font-family:var(--mono);font-size:10px;line-height:1.5;color:var(--muted-2);
+    word-break:break-all;max-height:44px;overflow:auto;margin:0 0 12px;
+  }
+  .wc-uri:empty{display:none}
+
+  /* ---------- motion ---------- */
+  .done{position:relative;overflow:hidden;border:1px solid var(--line);padding:24px 12px 16px;text-align:center}
+  .done .check{
+    width:58px;height:58px;display:block;margin:0 auto 12px;
+    fill:none;stroke:#fff;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;
+    stroke-dasharray:80;stroke-dashoffset:80;
+  }
+  .done .stamp{
+    display:inline-block;border:3px solid var(--red);color:var(--red);
+    font-size:21px;font-weight:800;letter-spacing:.3em;padding:7px 12px 7px 18px;
+    transform:rotate(-8deg);
+  }
+  .done-amt{margin:14px 0 0;font-size:17px;font-weight:700;letter-spacing:.06em}
+  .done-amt b{font-variant-numeric:tabular-nums}
+  .done-sub{margin:4px 0 0;font-size:9px;letter-spacing:.22em;color:var(--muted-2)}
+
+  @media (prefers-reduced-motion: no-preference){
+    .card{animation:cardIn .5s steps(9,end) both}
+    @keyframes cardIn{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+
+    .top{animation:rise .35s ease-out .12s both}
+    .eyebrow{animation:rise .35s ease-out .18s both}
+    .hero-fiat{animation:rise .35s ease-out .24s both}
+    .hero-crypto{animation:rise .35s ease-out .3s both}
+    .countdown{animation:rise .35s ease-out .36s both}
+    .qr-wrap{animation:rise .35s ease-out .42s both}
+    .addr-box{animation:rise .35s ease-out .48s both}
+    .warnline{animation:rise .35s ease-out .54s both}
+    .wallets{animation:rise .35s ease-out .6s both}
+    .foot{animation:rise .35s ease-out .66s both}
+    @keyframes rise{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+
+    .w{animation:rise .28s ease-out both}
+    .w:nth-child(1){animation-delay:.62s}
+    .w:nth-child(2){animation-delay:.67s}
+    .w:nth-child(3){animation-delay:.72s}
+    .w:nth-child(4){animation-delay:.77s}
+    .w:nth-child(5){animation-delay:.82s}
+    .w:nth-child(6){animation-delay:.87s}
+
+    .qr-wrap{position:relative;overflow:hidden}
+    .qr-wrap::after{
+      content:"";position:absolute;left:0;right:0;top:0;height:24px;opacity:0;pointer-events:none;
+      background:linear-gradient(180deg,transparent,rgba(200,16,46,.42),transparent);
+      animation:scan 1.5s steps(22,end) .8s 1 both;
+    }
+    @keyframes scan{
+      0%{transform:translateY(-130%);opacity:0}
+      8%{opacity:1}
+      82%{opacity:1}
+      100%{transform:translateY(600%);opacity:0}
+    }
+
+    /* paid */
+    html[data-state="paid"] .done .check,
+    html[data-state="overpaid"] .done .check{animation:draw .5s steps(12,end) .15s forwards}
+    @keyframes draw{to{stroke-dashoffset:0}}
+
+    html[data-state="paid"] .done .stamp,
+    html[data-state="overpaid"] .done .stamp{animation:slam .45s cubic-bezier(.2,1.6,.3,1) .06s both}
+    @keyframes slam{
+      0%{transform:rotate(-18deg) scale(2.7);opacity:0}
+      55%{opacity:1}
+      72%{transform:rotate(-5deg) scale(.93)}
+      100%{transform:rotate(-8deg) scale(1);opacity:1}
+    }
+
+    html[data-state="paid"] .card,
+    html[data-state="overpaid"] .card{animation:cardIn .5s steps(9,end) both, paidflash .65s steps(2,end) .45s 2}
+    @keyframes paidflash{0%,100%{border-color:var(--line)}50%{border-color:#fff}}
+
+    html[data-state="paid"] .done-amt,
+    html[data-state="overpaid"] .done-amt{animation:rise .4s ease-out .35s both}
+  }
+
+  @media (max-height:700px){
+    .card{padding:14px 14px 11px}
+    .top{margin-bottom:14px}
+    .hero-fiat{font-size:40px}
+    .countdown{margin-top:10px;padding:8px 10px}
+    .qr{width:140px;height:140px;padding:8px}
+    .qr-wrap{margin-top:10px}
+    .qrctl{margin-top:7px}
+    .seg button{padding:5px 8px;font-size:8px}
+    .addr-box{margin-top:10px;min-height:40px}
+    .warnline{margin-top:8px}
+    .wallets{margin-top:10px}
+    .foot{margin-top:9px;padding-top:8px}
+  }
+  /* short screens: keep the wallet buttons, drop their chrome */
+  @media (max-height:700px){
+    .w-label{display:none}
+    .nohint{display:none}
+    .w{width:46px;height:46px}
+    .w img{width:22px;height:22px}
+    .wallets{margin-top:9px}
+  }
+
+  /* a partial keeps the QR but pays for its panel with height */
+  [data-state="partial"] .qr{width:186px;height:186px;padding:9px}
+  [data-state="partial"] .qr-wrap{margin-top:10px}
+  [data-state="partial"] .panel .big{padding:11px}
+  [data-state="partial"] .wallets{margin-top:12px}
+  @media (max-height:820px){
+    [data-state="partial"] .qr{width:156px;height:156px}
+    [data-state="partial"] .countdown{margin-top:7px;padding:7px 10px}
+  }
+  @media (max-height:700px){
+    [data-state="partial"] .qr{width:132px;height:132px;padding:7px}
+    [data-state="partial"] .wallets{display:none}
+  }
+
+  .receipt{display:none;margin-top:26px;border-top:1px solid var(--line);padding-top:14px}
+  .receipt div{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:5px 0}
+  .receipt span{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted-2)}
+  .receipt b{font-family:var(--mono);font-size:11.5px;font-weight:500;color:var(--muted);font-variant-numeric:tabular-nums}
+
+  /* ---------- desktop ---------- */
+  @media (min-width:900px){
+    body{padding:24px}
+    .card{max-width:880px;padding:26px 28px 18px}
+    .top{margin-bottom:24px}
+    .cols{display:grid;grid-template-columns:minmax(0,1fr) 322px;column-gap:48px;align-items:start}
+    .col-a{grid-column:1;grid-row:1;align-self:stretch;display:flex;flex-direction:column;justify-content:flex-start}
+    .col-a .countdown{margin-top:auto}
+    .receipt{display:block}
+    .col-b{grid-column:2;grid-row:1;padding-left:48px;border-left:1px solid var(--line)}
+    .col-c{grid-column:1;grid-row:2;margin-top:22px}
+    .qr{width:250px;height:250px;padding:13px}
+    .qr-wrap{margin-top:0}
+    .hero-fiat{font-size:64px}
+    .hero-crypto{font-size:14px}
+    .countdown{margin-top:18px}
+    .wallets{margin-top:22px}
+    .foot{margin-top:24px}
+    .panel .big{padding:15px}
+    .done{padding:30px 16px 20px}
+  }
+  /* nothing to pay in terminal states: collapse the right column */
+  :is(html[data-state="paid"],html[data-state="expired"],html[data-state="overpaid"],
+      html[data-state="confirming"],html[data-state="late"],html[data-state="cancelled"],
+      html[data-state="underpaid"],html[data-state="wrongasset"],html[data-state="notfound"]) .col-b{display:none}
+  @media (min-width:900px){
+    :is(html[data-state="paid"],html[data-state="expired"],html[data-state="overpaid"],
+        html[data-state="confirming"],html[data-state="late"],html[data-state="cancelled"],
+        html[data-state="underpaid"],html[data-state="wrongasset"],html[data-state="notfound"]) .cols{display:block}
+  }
+
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+</style>
+</head>
+<body>
+
+<main class="card" id="card">
+  <div class="track"><i id="bar"></i></div>
+
+  <div class="top">
+    <div class="brand"><span class="mark"><img id="brandMark" src="icons/logo.svg" alt=""></span> <span id="brandName">PAY</span></div>
+    <div class="meta"><b id="inv">INV-0007</b> <span id="label">Acme invoice 2291</span></div>
+  </div>
+
+  <div class="cols">
+  <div class="col-a">
+  <div class="eyebrow" id="eyebrow">Amount due</div>
+  <div class="hero-fiat"><span class="cur">$</span><span id="hfiat">10.00</span></div>
+  <div class="hero-crypto">
+    <img class="asset-ico" id="assetIco" src="icons/token-usdt.svg" alt="">
+    <b id="hcrypto-asset">USDT</b>
+    <span class="sep">on</span>
+    <img class="asset-ico" id="chainIco" src="icons/chain-bsc.svg" alt="">
+    <b class="chain-name" id="hcrypto-chain">BNB Smart Chain</b>
+  </div>
+
+  <div class="receipt" id="receipt">
+    <div><span>Issued</span><b id="r-issued">—</b></div>
+    <div><span>Expires</span><b id="r-expires">—</b></div>
+    <div><span>Invoice</span><b id="r-inv">—</b></div>
+  </div>
+
+  <div class="countdown" id="cd">
+    <span class="cd-dot"></span>
+    <span class="cd-time" id="cdTime">29:47</span>
+    <span class="cd-label" id="cdLabel">left to pay</span>
+  </div>
+
+  </div>
+  <div class="col-b">
+  <section class="pay" id="pay">
+    <div class="qr-wrap">
+      <div class="qr" id="qrShell">
+        <div id="qr"></div>
+      </div>
+    </div>
+    <div class="qrctl">
+      <div class="seg" id="segAmount">
+        <button type="button" data-v="1" class="on">Amount</button>
+        <button type="button" data-v="0">Address</button>
+      </div>
+    </div>
+    <div class="addr-box">
+      <div class="addr" id="addr">0x9F2C4a7E1bD3c05A8f6E2d1B4c7A0e3D5b8F1c62</div>
+      <button class="copy" id="copyBtn" type="button" aria-label="Copy address">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+        <span id="copyTxt">Copy</span>
+      </button>
+    </div>
+    <div class="warnline">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
+      <span><b id="warn-asset">USDT</b> on <b id="warn-net">BNB Smart Chain (BEP-20)</b> only</span>
+    </div>
+  </section>
+
+  </div>
+  <div class="col-c">
+  <section class="panel" id="p-paid">
+    <div class="done">
+      <svg class="check" viewBox="0 0 64 64" aria-hidden="true"><path d="M16 34l11 11 22-25"/></svg>
+      <div class="stamp">PAID</div>
+      <p class="done-amt"><b id="paid-amt">10.00 USDT</b></p>
+      <p class="done-sub" id="paid-sub">CONFIRMED ON-CHAIN</p>
+      <div class="txid">txid 0x9f4c1a7e2b8d0361c5a7e94b2d10f83c6a5e7b9d0c4f2a8e1b6d3c9f7a2e5b40</div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-expired">
+    <div class="big">
+      <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+      <div><h2>Link dead</h2><p>Ask for a new invoice.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-partial">
+    <div class="big">
+      <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></span>
+      <div><h2 id="part-title">Part paid</h2><p><b id="part-amt">8.42 of 10.00 USDT</b> in.</p><p id="part-next">Send <b id="part-rest">1.58 USDT</b> more.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-overpaid">
+    <div class="big">
+      <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 6.5c0-2-2.2-3.5-5-3.5s-5 1.5-5 3.5S9.2 10 12 10s5 1.5 5 3.5S14.8 17 12 17s-5-1.5-5-3.5"/></svg></span>
+      <div><h2>Overpaid</h2><p><b id="over-amt">12.00 USDT</b> in. <span id="over-diff">$2.00</span> extra.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-confirming">
+    <div class="big">
+      <span class="icon spin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 12a9 9 0 1 1-6.2-8.6"/></svg></span>
+      <div><h2>Seen</h2><p><b id="conf-n">1 of 3</b> confirmations.</p></div>
+    </div>
+    <div class="txid" id="conf-tx">txid 0x…</div>
+  </section>
+
+  <section class="panel" id="p-late">
+    <div class="big">
+      <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+      <div><h2>Paid late</h2><p><b id="late-amt">40.00 USDT</b> in. We'll check it.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-cancelled">
+    <div class="big">
+      <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></span>
+      <div><h2>Cancelled</h2><p>Merchant pulled it.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-underpaid">
+    <div class="big">
+      <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></span>
+      <div><h2>Too small</h2><p><b id="under-amt">0.40 USDT</b> in. Under the minimum.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-wrongasset">
+    <div class="big">
+      <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></span>
+      <div><h2>Wrong coin</h2><p>Sent on the wrong network. No auto credit.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-notfound">
+    <div class="big">
+      <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></span>
+      <div><h2>No invoice</h2><p>Bad or deleted link.</p></div>
+    </div>
+  </section>
+
+  <section class="wallets" id="wallets">
+    <div class="w-label">Pay from a wallet</div>
+    <div class="wgrid" id="wgrid"></div>
+    <button class="wpay" id="wpay" type="button">Pay from this wallet</button>
+  </section>
+
+  </div>
+  </div>
+  <footer class="foot">
+    <span class="live"><span class="pulse" id="pulse"></span><span id="liveTxt">waiting for payment</span></span>
+  </footer>
+</main>
+
+<div class="sheet" id="wcSheet">
+  <div class="sheet-card">
+    <h3>WalletConnect</h3>
+    <p class="sub">Scan with any WalletConnect wallet.</p>
+    <div class="wc-qr" id="wcQr"></div>
+    <div class="wc-uri" id="wcUri"></div>
+    <div class="sheet-actions">
+      <button class="btn-ghost" id="wcCancel" type="button">Close</button>
+    </div>
+    <div class="demo-note" id="wcNote"></div>
+  </div>
+</div>
+
+<div class="sheet" id="sheet">
+  <div class="sheet-card">
+    <h3>Confirm</h3>
+    <p class="sub">Check it, then approve in your wallet.</p>
+    <div class="rows">
+      <div class="row"><span>Amount</span><b id="s-amt">10.00 USDT</b></div>
+      <div class="row"><span>Network</span><b id="s-net">BNB Smart Chain</b></div>
+      <div class="row"><span>To</span><code id="s-to">0x…</code></div>
+    </div>
+    <div class="sheet-actions">
+      <button class="btn-primary" id="s-go" type="button">Confirm in wallet</button>
+      <button class="btn-ghost" id="s-cancel" type="button">Cancel</button>
+    </div>
+    <div class="demo-note" id="s-demo">Demo. Nothing is sent.</div>
+  </div>
+</div>
+
+<script src="qrcode.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  var CHAINS = {
+    bsc:      {name:"BNB Smart Chain", suffix:"BEP-20",   asset:"USDT", color:"#f0b90b", decimals:18,
+               addr:"0x9F2C4a7E1bD3c05A8f6E2d1B4c7A0e3D5b8F1c62", chainId:56,
+               token:"0x55d398326f99059fF775485246999027B3197955",
+               rpc:"https://bsc-dataseed.bnbchain.org", explorer:"https://bscscan.com",
+               native:{name:"BNB",symbol:"BNB",decimals:18}},
+    polygon:  {name:"Polygon",         suffix:"PoS",      asset:"USDT", color:"#8247e5", decimals:6,
+               addr:"0x4Bd7E2a91C6f83D05eA1b47c9F2d6E3A8b5C0D17", chainId:137,
+               token:"0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
+               rpc:"https://polygon-rpc.com", explorer:"https://polygonscan.com",
+               native:{name:"POL",symbol:"POL",decimals:18}},
+    solana:   {name:"Solana",          suffix:"SPL",      asset:"USDT", color:"#14f195", decimals:null,
+               addr:"7xKq4mNpR2vT8sWcYbHd3FjL5nAaZ9uE6gQkX1oM4P", chainId:null},
+    ethereum: {name:"Ethereum",        suffix:"ERC-20",   asset:"USDT", color:"#627eea", decimals:6,
+               addr:"0x2Ea8c94F1b70D3a6e5C2B8d04fA79b13C6d5E8a2", chainId:1,
+               token:"0xdAC17F958D2ee523a2206206994597C13D831ec7",
+               rpc:"https://eth.llamarpc.com", explorer:"https://etherscan.io",
+               native:{name:"Ether",symbol:"ETH",decimals:18}},
+    arbitrum: {name:"Arbitrum One",    suffix:"Nitro",    asset:"USDT", color:"#28a0f0", decimals:6,
+               addr:"0x8C1f5A2dE93b7046aF2e9C5B1d38a06E7f4B2c95", chainId:42161,
+               token:"0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
+               rpc:"https://arb1.arbitrum.io/rpc", explorer:"https://arbiscan.io",
+               native:{name:"Ether",symbol:"ETH",decimals:18}},
+    base:     {name:"Base",            suffix:"OP Stack", asset:"USDC", color:"#0052ff", decimals:6,
+               addr:"0x5Ae93C7b1D046f28aB6c2E9d7F30b85A4c1E6d92", chainId:8453,
+               token:"0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+               rpc:"https://mainnet.base.org", explorer:"https://basescan.org",
+               native:{name:"Ether",symbol:"ETH",decimals:18}}
+  };
+
+  var qs = new URLSearchParams(location.search);
+  var key = (qs.get("chain") || "bsc").toLowerCase();
+  var chain = CHAINS[key] || CHAINS.bsc;
+  var state = (qs.get("state") || "live").toLowerCase();
+  var usd = parseFloat(qs.get("usd") || "10");
+  var secs = parseInt(qs.get("t") || "1800", 10);
+  var total = parseInt(qs.get("total") || String(secs), 10);
+
+  if (isNaN(usd) || usd < 0) usd = 10;
+  if (isNaN(secs) || secs < 0) secs = 1800;
+  if (isNaN(total) || total <= 0) total = secs;
+
+  /* provider decides whether a partial can still be topped up */
+  var provider = (qs.get("provider") || "cryptapi").toLowerCase();
+
+  /* the address shown, copied and encoded must be the real one when live */
+  var realAddr = qs.get("addr");
+  var isLive = qs.get("live") === "1" && !!realAddr;
+  var toAddr = realAddr || chain.addr;
+  var isEVM = chain.chainId !== null;
+
+  document.documentElement.setAttribute("data-state", state);
+  document.title = "Invoice " + (qs.get("inv") || "INV-0007") + " · " + usd.toFixed(2) + " " + chain.asset;
+
+  var $ = function(id){ return document.getElementById(id); };
+
+  var BRAND = window.__BRAND || {};
+  if (BRAND.name) { $("brandName").textContent = BRAND.name; document.title = BRAND.name + " · " + document.title; }
+  if (BRAND.logo) { $("brandMark").src = BRAND.logo; }
+
+  var issued = new Date(Date.now() - Math.max(total - secs, 0) * 1000);
+  var ends = new Date(Date.now() + secs * 1000);
+  var fmt = function (d) { return d.toLocaleString(undefined, {day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit"}); };
+  $("r-issued").textContent = fmt(issued);
+  $("r-expires").textContent = fmt(ends);
+  $("r-inv").textContent = qs.get("inv") || "INV-0007";
+  var nf2 = new Intl.NumberFormat(undefined, { minimumFractionDigits:2, maximumFractionDigits:2 });
+  var nf4 = new Intl.NumberFormat(undefined, { minimumFractionDigits:4, maximumFractionDigits:4 });
+  /* grouped thousands, and never show 0.00 for a real sub-cent amount */
+  function money(n){ return (n > 0 && n < 1 ? nf4 : nf2).format(n); }
+
+  $("eyebrow").textContent  = ({paid:"Paid", overpaid:"Paid", expired:"Total",
+                                cancelled:"Total", late:"Total", confirming:"Paid",
+                                underpaid:"Total", wrongasset:"Total"})[state] || "Due";
+  $("inv").textContent      = qs.get("inv") || "INV-0007";
+  $("label").textContent    = qs.get("label") || "Acme invoice 2291";
+  $("hfiat").textContent    = money(usd);
+  $("hcrypto-asset").textContent = chain.asset;
+  $("hcrypto-chain").textContent = chain.name;
+  $("addr").textContent     = toAddr;
+  $("addr").title           = toAddr;
+  $("warn-asset").textContent = chain.asset;
+  $("warn-net").textContent   = chain.name + " (" + chain.suffix + ")";
+  var gotRaw = parseFloat(qs.get("got") || "");
+  var got = isNaN(gotRaw) ? null : gotRaw;
+  $("paid-amt").textContent   = money(got === null ? usd : got) + " " + chain.asset;
+  var partRecv = got === null ? usd * 0.842 : got;
+  $("part-amt").textContent   = money(partRecv) + " of " + money(usd) + " " + chain.asset;
+  $("part-rest").textContent  = money(Math.max(usd - partRecv, 0)) + " " + chain.asset;
+  var overRecv = got === null ? usd * 1.2 : got;
+  $("over-amt").textContent   = money(overRecv) + " " + chain.asset;
+  $("over-diff").textContent  = "$" + money(Math.max(overRecv - usd, 0));
+  $("late-amt").textContent   = money(got === null ? usd : got) + " " + chain.asset;
+  $("under-amt").textContent  = money(got === null ? usd * 0.04 : got) + " " + chain.asset;
+
+  if (state === "expired" || state === "cancelled" || state === "notfound") $("card").classList.add("struck");
+
+  var FOOTMAP = {
+    live:       ["waiting", ""],
+    partial:    ["part paid", "amber"],
+    confirming: ["confirming", "amber"],
+    paid:       ["paid", ""],
+    overpaid:   ["paid", ""],
+    late:       ["late. checking", "amber"],
+    expired:    ["closed", "idle"],
+    cancelled:  ["cancelled", "idle"],
+    underpaid:  ["too small", "amber"],
+    wrongasset: ["wrong coin", "amber"],
+    notfound:   ["no invoice", "idle"]
+  };
+  var FOOT = FOOTMAP[state] || FOOTMAP.live;
+  $("liveTxt").textContent = FOOT[0];
+  if (FOOT[1]) $("pulse").classList.add(FOOT[1]);
+
+  /* NOWPayments keeps the funds and cannot accept a top-up on the same invoice,
+     so inviting one would be a lie; CryptAPI's address keeps accepting the rest. */
+  if (provider === "nowpayments") {
+    $("part-next").textContent = "Can't top up. Contact the sender.";
+    if (state === "partial") $("liveTxt").textContent = "part paid. checking";
+  }
+
+  /* ---------- QR ---------- */
+  function drawQr(el, text, ec) {
+    try {
+      var q = qrcode(0, ec || "M");
+      q.addData(text);
+      q.make();
+      el.innerHTML = q.createSvgTag({cellSize: 4, margin: 0, scalable: true});
+    } catch (e) { el.textContent = text; }
+  }
+  /* EIP-681 / Solana payment URI: scanning prefills asset, chain and amount.
+     qr=addr falls back to the bare address for wallets that choke on URIs. */
+  function payUri() {
+    if (!isEVM) {
+      var mint = "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"; /* USDT-SPL */
+      /* label + message are rendered by the wallet, so the customer sees who and what */
+      return "solana:" + toAddr
+           + "?amount=" + (Math.round(usd * 100) / 100).toFixed(2)
+           + "&spl-token=" + mint
+           + "&label=" + encodeURIComponent("Anomly")
+           + "&message=" + encodeURIComponent(qs.get("inv") || "INV-0007");
+    }
+    return "ethereum:" + chain.token + "@" + chain.chainId + "/transfer"
+         + "?address=" + toAddr + "&uint256=" + unitsOf(usd, chain.decimals).toString();
+  }
+  var qrWithAmount = qs.get("qr") !== "addr";
+  $("assetIco").src = chain.asset === "USDC" ? "icons/token-usdc.svg" : "icons/token-usdt.svg";
+  $("assetIco").alt = chain.asset;
+  $("chainIco").src = "icons/chain-" + (CHAINS[key] ? key : "bsc") + ".svg";
+  $("chainIco").alt = chain.name;
+
+  function renderQr() {
+    var payload = qrWithAmount ? payUri() : toAddr;
+    drawQr($("qr"), payload, "L");   /* no centre mark, so L keeps modules big */
+    $("qrShell").setAttribute("aria-label",
+      "Payment QR for " + (qrWithAmount ? money(usd) + " " + chain.asset + " " : "") + "to " + chain.name);
+  }
+  renderQr();
+
+  $("segAmount").addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (!b) return;
+    [].forEach.call(this.querySelectorAll("button"), function (x) { x.classList.toggle("on", x === b); });
+    qrWithAmount = b.getAttribute("data-v") === "1";
+    renderQr();
+  });
+  [].forEach.call($("segAmount").querySelectorAll("button"), function (b) {
+    b.classList.toggle("on", (b.getAttribute("data-v") === "1") === qrWithAmount);
+  });
+
+  /* ---------- copy ---------- */
+  var btn = $("copyBtn"), txt = $("copyTxt");
+  function flash(){
+    btn.classList.add("done"); txt.textContent = "Copied";
+    setTimeout(function(){ btn.classList.remove("done"); txt.textContent = "Copy"; }, 1500);
+  }
+  btn.addEventListener("click", function(){
+    var a = chain.addr;
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(a).then(flash, function(){ fallback(a); });
+    } else { fallback(a); }
+  });
+  function fallback(a){
+    var t = document.createElement("textarea");
+    t.value = a; t.setAttribute("readonly",""); t.style.position = "fixed"; t.style.opacity = "0";
+    document.body.appendChild(t); t.select();
+    try { document.execCommand("copy"); flash(); } catch(e){}
+    document.body.removeChild(t);
+  }
+
+  /* ---------- wallets ---------- */
+  var here = encodeURIComponent(location.href);
+  var ref  = encodeURIComponent(location.origin);
+
+  var LIST = isEVM ? [
+    {n:"MetaMask", i:"metamask", u:"https://link.metamask.io/dapp/" + here},
+    {n:"Trust Wallet", i:"trust", u:"https://link.trustwallet.com/open_url?coin_id=60&url=" + here},
+    {n:"Coinbase Wallet", i:"coinbase", u:"https://go.cb-w.com/dapp?cb_url=" + here},
+    {n:"Rainbow", i:"rainbow", u:"https://rnbwapp.com/" + here}
+  ] : [
+    {n:"Phantom", i:"phantom", u:"https://phantom.com/ul/browse/" + here + "?ref=" + ref},
+    {n:"Solflare", i:"solflare", u:"https://solflare.com/ul/v1/browse/" + here + "?ref=" + ref}
+  ];
+
+  LIST.forEach(function(w){
+    var a = document.createElement("a");
+    a.className = "w"; a.href = w.u; a.target = "_blank"; a.rel = "noopener noreferrer";
+    a.title = w.n; a.setAttribute("aria-label", "Pay with " + w.n);
+    var img = document.createElement("img");
+    img.src = "icons/" + w.i + ".svg"; img.alt = w.n;
+    a.appendChild(img);
+    $("wgrid").appendChild(a);
+  });
+
+  var inj = (isEVM && window.ethereum) ? window.ethereum : null;
+  var sheet = $("sheet");
+
+  $("s-amt").textContent = money(usd) + " " + chain.asset;
+  $("s-net").textContent = chain.name;
+  $("s-to").textContent  = toAddr.slice(0, 10) + "…" + toAddr.slice(-6);
+
+  function armPayButton() {
+    var payBtn = $("wpay");
+    if (payBtn.classList.contains("show")) return;
+    payBtn.textContent = "Pay " + money(usd) + " " + chain.asset + " from this wallet";
+    payBtn.classList.add("show");
+    $("wgrid").parentNode.insertBefore(payBtn, $("wgrid"));
+    payBtn.addEventListener("click", function(){
+      $("s-demo").textContent = "Demo. Nothing is sent.";
+      $("s-demo").classList.remove("show");
+      sheet.classList.add("open");
+    });
+  }
+  function bindProvider(p) {
+    if (!p || !p.on) return;
+    try {
+      p.on("accountsChanged", function (accs) { if (accs && accs.length) p.accounts = accs; });
+      p.on("disconnect", function () { inj = null; });
+    } catch (e) {}
+  }
+
+  var noHint = null;
+  if (inj) { armPayButton(); bindProvider(inj); }
+  else if (isEVM) {
+    noHint = document.createElement("div");
+    noHint.className = "nohint";
+    noHint.textContent = "No wallet detected. Use WalletConnect.";
+    $("wallets").appendChild(noHint);
+  }
+
+  /* ---------- WalletConnect ---------- */
+  var WC_PROJECT_ID = "";
+  var wcSheet = $("wcSheet"), wcNote = $("wcNote"), wcProvider = null;
+  function wcMsg(msg) { wcNote.textContent = msg; wcNote.classList.add("show"); }
+
+  /* a pairing sheet that spins forever is worse than an error */
+  function wcTimeout(promise, ms, msg) {
+    return Promise.race([promise, new Promise(function (_, reject) {
+      setTimeout(function () { reject(new Error(msg)); }, ms);
+    })]);
+  }
+
+  if (isEVM) {
+    var wcTile = document.createElement("button");
+    wcTile.type = "button";
+    wcTile.className = "w";
+    wcTile.title = "WalletConnect";
+    wcTile.setAttribute("aria-label", "Pay with WalletConnect");
+    wcTile.innerHTML = '<img src="icons/walletconnect.svg" alt="WalletConnect">';
+    wcTile.addEventListener("click", openWC);
+    $("wgrid").appendChild(wcTile);
+  }
+
+  async function openWC() {
+    var id = qs.get("wc") || WC_PROJECT_ID;
+    wcNote.classList.remove("show");
+    wcSheet.classList.add("open");
+    if (wcProvider) { wcSheet.classList.remove("open"); sheet.classList.add("open"); return; }
+    if (!id) {
+      wcMsg("Needs a Reown project ID. Add ?wc=<id>.");
+      return;
+    }
+    try {
+      wcMsg("Connecting…");
+      var mod = await import("https://esm.sh/@walletconnect/ethereum-provider@2.26.0");
+      var EP = mod.EthereumProvider || mod.default;
+      wcProvider = await wcTimeout(EP.init({
+        projectId: id,
+        optionalChains: [chain.chainId],   /* `chains` was deprecated in WC 2.x */
+        showQrModal: false,
+        metadata: { name: "Anomly", description: "Invoice payment", url: location.origin, icons: [] }
+      }), 15000, "No relay. Check your connection.");
+      /* display_uri can fire before the listener is attached (or never, if the relay
+         is unreachable), so show it from either source and fail visibly instead of spinning */
+      var gotUri = false, uriTimer = null;
+      function onUri(uri) {
+        gotUri = true;
+        if (uriTimer) clearTimeout(uriTimer);
+        drawQr($("wcQr"), uri);
+        $("wcUri").textContent = uri;
+        wcNote.classList.remove("show");
+      }
+      wcProvider.on("display_uri", onUri);
+      if (wcProvider.uri) onUri(wcProvider.uri);
+      uriTimer = setTimeout(function () {
+        if (!gotUri) wcMsg("No relay. Check your connection.");
+      }, 15000);
+      await wcTimeout(wcProvider.connect(), 120000, "Timed out. Reopen and scan again.");
+      inj = wcProvider;
+      bindProvider(wcProvider);
+      if (noHint && noHint.parentNode) noHint.parentNode.removeChild(noHint);
+      armPayButton();
+      wcSheet.classList.remove("open");
+      $("s-demo").textContent = "Demo. Nothing is sent.";
+      $("s-demo").classList.remove("show");
+      sheet.classList.add("open");
+    } catch (e) {
+      wcMsg("Failed: " + (e && e.message ? e.message : e));
+    }
+  }
+  $("wcCancel").addEventListener("click", function(){ wcSheet.classList.remove("open"); });
+  wcSheet.addEventListener("click", function (e) { if (e.target === wcSheet) wcSheet.classList.remove("open"); });
+
+  $("s-cancel").addEventListener("click", function(){ sheet.classList.remove("open"); });
+  sheet.addEventListener("click", function (e) { if (e.target === sheet) sheet.classList.remove("open"); });
+
+  function erc20Data(to, amount, dec) {
+    var units = BigInt(Math.round(amount * 100)) * (BigInt(10) ** BigInt(dec - 2));
+    var a = to.toLowerCase().replace(/^0x/, "").padStart(64, "0");
+    var v = units.toString(16).padStart(64, "0");
+    return "0xa9059cbb" + a + v;
+  }
+
+  function setState(next) {
+    document.documentElement.setAttribute("data-state", next);
+    var f = FOOTMAP[next] || FOOTMAP.live;
+    $("liveTxt").textContent = f[0];
+    $("pulse").className = "pulse" + (f[1] ? " " + f[1] : "");
+  }
+
+  function said(msg) { var e = new Error(msg); e.friendly = true; return e; }
+
+  /* human message for every wallet rejection we can recognise */
+  function walletError(e) {
+    var code = e && (e.code || (e.data && e.data.code));
+    var text = (e && (e.message || e.reason)) || "";
+    if (code === 4001) return "Cancelled.";
+    if (code === -32002) return "Wallet has a request open. Confirm it there.";
+    if (code === 4902) return "Add " + chain.name + " to your wallet, then retry.";
+    if (/insufficient funds|insufficient balance/i.test(text)) return "No " + chain.native.symbol + " for gas.";
+    if (/user rejected|denied/i.test(text)) return "Cancelled.";
+    if (/network|underlying network changed/i.test(text)) return "Wallet changed network. Try again.";
+    return e && e.message ? e.message : "Wallet unavailable.";
+  }
+
+  async function ensureChain() {
+    var hexId = "0x" + chain.chainId.toString(16);
+    var current = null;
+    try { current = await inj.request({ method: "eth_chainId" }); } catch (e) {}
+    if (current && parseInt(current, 16) === chain.chainId) return;
+
+    try {
+      await inj.request({ method: "wallet_switchEthereumChain", params: [{ chainId: hexId }] });
+    } catch (e) {
+      var code = e && e.code;
+      if (code === 4001) throw said("You cancelled the network switch.");
+      if (code === 4902 || /unrecognized chain|not added/i.test(e && e.message || "")) {
+        try {
+          await inj.request({ method: "wallet_addEthereumChain", params: [{
+            chainId: hexId,
+            chainName: chain.name,
+            nativeCurrency: chain.native,
+            rpcUrls: [chain.rpc],
+            blockExplorerUrls: [chain.explorer]
+          }]});
+        } catch (e2) {
+          if (e2 && e2.code === 4001) throw said("You cancelled adding " + chain.name + ".");
+          throw said("Couldn't add " + chain.name + ".");
+        }
+      } else {
+        throw said("Switch to " + chain.name + ".");
+      }
+    }
+
+    var now = null;
+    try { now = await inj.request({ method: "eth_chainId" }); } catch (e) {}
+    if (now && parseInt(now, 16) !== chain.chainId)
+      throw said("Still on the wrong network. Switch to " + chain.name + ".");
+  }
+
+  function unitsOf(amount, dec) {
+    return BigInt(Math.round(amount * 100)) * (BigInt(10) ** BigInt(dec - 2));
+  }
+
+  function formatUnits(v, dec) {
+    var whole = v / (BigInt(10) ** BigInt(dec));
+    var frac = (v % (BigInt(10) ** BigInt(dec))).toString().padStart(dec, "0").slice(0, 2);
+    return whole.toString() + "." + frac;
+  }
+
+  /* advisory balance check: catches "empty wallet" before the user fights the wallet UI */
+  async function precheck(account) {
+    try {
+      var data = "0x70a08231" + account.toLowerCase().replace(/^0x/, "").padStart(64, "0");
+      var raw = await inj.request({ method: "eth_call", params: [{ to: chain.token, data: data }, "latest"] });
+      var have = BigInt(raw || "0x0");
+      if (have < unitsOf(usd, chain.decimals))
+        throw said("Wallet has " + formatUnits(have, chain.decimals) + " " + chain.asset +
+                   ". Need " + money(usd) + ".");
+      var gas = await inj.request({ method: "eth_getBalance", params: [account, "latest"] });
+      if (BigInt(gas || "0x0") === 0n)
+        throw said("No " + chain.native.symbol + " for gas.");
+    } catch (e) {
+      if (e && e.friendly) throw e;   /* a real finding */
+      /* RPC unsupported or rate-limited: never block a payment on a failed precheck */
+    }
+  }
+
+  $("s-go").addEventListener("click", async function(){
+    if (!isLive) { $("s-demo").classList.add("show"); return; }
+    if (!inj) { $("s-demo").textContent = "No wallet. Pick one above."; $("s-demo").classList.add("show"); return; }
+    var go = $("s-go");
+    go.disabled = true; go.textContent = "Waiting for wallet…";
+    try {
+      var acc = await inj.request({ method: "eth_requestAccounts" });
+      if (!acc || !acc.length) throw said("No account approved.");
+      await ensureChain();
+      await precheck(acc[0]);
+      await inj.request({ method: "eth_sendTransaction", params: [{
+        from: acc[0], to: chain.token, data: erc20Data(toAddr, usd, chain.decimals)
+      }]});
+      sheet.classList.remove("open");
+      setState("confirming");
+      $("conf-tx").textContent = "Waiting for the network to pick it up…";
+    } catch (e) {
+      $("s-demo").textContent = (e && e.friendly) ? e.message : walletError(e);
+      $("s-demo").classList.add("show");
+    } finally {
+      go.disabled = false; go.textContent = "Confirm in wallet";
+    }
+  });
+
+  /* ---------- timer ---------- */
+  var bar = $("bar"), card = $("card"), cdTime = $("cdTime"), cdLabel = $("cdLabel");
+
+  function paint(){
+    var m = Math.floor(secs / 60), s = secs % 60;
+    var pct = total ? (secs / total) * 100 : 0;
+    var colour = pct >= 75 ? "#e8e5df"
+               : pct >= 50 ? "#b9b6b0"
+               : pct >= 25 ? "#c8102e"
+               :             "#ff2b3d";
+    cdTime.textContent = m + ":" + (s < 10 ? "0" : "") + s;
+    cdLabel.textContent = pct < 25 ? "left. pay now" : "left to pay";
+    bar.style.width = pct + "%";
+    card.style.setProperty("--time", colour);
+    card.classList.toggle("warn", pct < 50);
+    card.classList.toggle("urgent", pct < 25);
+  }
+
+  if (state === "live" || state === "partial") {
+    paint();
+    var iv = setInterval(function(){
+      secs--;
+      if (secs <= 0) {
+        clearInterval(iv);
+        document.documentElement.setAttribute("data-state", "expired");
+        card.classList.add("struck");
+        $("liveTxt").textContent = "closed";
+        $("pulse").classList.add("idle");
+        cdTime.textContent = "0:00";
+        cdLabel.textContent = "closed";
+        return;
+      }
+      paint();
+    }, 1000);
+  }
+})();
+</script>
+</body>
+</html>

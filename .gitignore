@@ -1,0 +1,15 @@
+.env
+.env.*
+!.env.example
+data/
+__pycache__/
+*.pyc
+.playwright-mcp/
+.opencode/
+*.db
+*.db-wal
+*.db-shm
+.venv/
+venv/
+# personal assets (see README: drop your own mark)
+web/icons/punisher.jpg
